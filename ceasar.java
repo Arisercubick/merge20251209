@@ -1,6 +1,6 @@
 public class ceasar { 
 	public static void main(String[] args) {
-		String as = "abced";
+		String as = "ab2Gced";
 		System.out.println(ceasar(as));
 	}
 	
@@ -20,23 +20,23 @@ public class ceasar {
 	}
 	
 	public static char small(char letter) {
-		if (letter < 'w') {
+		if (letter > 'w') {
 			letter = (char) (letter - 'w');
 		}
-		return (char)(letter + ('c' - 'a'));
+		return (char)(letter + ('d' - 'a'));
 	}
 	
 	public static char large(char letter) {
-		if (letter < 'W') {
+		if (letter > 'W') {
 			letter = (char) (letter - 'W');
 		}
-		return (char)(letter + ('C' - 'A'));
+		return (char)(letter + ('D' - 'A'));
 	}
 	
 	public static char num(char num) {
-		if (num < '6') {
+		if (num > '6') {
 			num = (char) (num - '6');
 		}
-		return (char)(num + ('3'-'1'));
+		return (char)(num + ('4'-'1'));
 	}
 }
