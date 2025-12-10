@@ -80,11 +80,11 @@ public class encrypter {
 					System.out.println();
 					
 					System.out.print("Do you want to continue (Yes to continue): ");
-					String response = reader.next();
+					String response = reader.nextLine();
 					if (!(response.toUpperCase().equals("YES"))) {
 						continueOn = false;
 					}
-					reader.nextLine();
+					indexCount = 0;
 				}
 			}
 		}
@@ -107,11 +107,10 @@ public class encrypter {
 	public static void printCode(int[] index, int[] index2) {
 		System.out.println();
 		for (int i = 0; i < index.length; i++) {
-			System.out.print("0100" + index[i]);
+			System.out.printf("0100%02d", index[i]);
 		}
-		System.out.print("|||||");
 		for (int i = 0; i < index2.length; i++) {
-			System.out.print("0200" + index2[i]);
+			System.out.printf("0200%02d", index2[i]);
 		}
 	}
 	
