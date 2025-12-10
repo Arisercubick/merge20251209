@@ -48,7 +48,19 @@ public class encrypter {
 							}
 						}
 					} else {
-						phrase = phrase + let;
+						String temp = "" + (int) let;
+						for (int k = 0; k < temp.length(); k++) {
+							char wod = temp.charAt(k);
+							System.out.println(wod);
+							boolean found = false;
+							for (int j = 0; j < finalArray.length && !found; j++) {
+								System.out.println("verifying if " + wod + " equals to " + finalArray[j]);
+								if (wod == ourArray[j]) {
+									phrase = phrase + finalArray[j];
+									found = true;
+								}
+							}
+						}
 						shift(arrCode, shiftcode);
 						for (int k = 0; k < finalArray.length; k++) {
 							finalArray[k] = ourArray[arrCode[k]];
