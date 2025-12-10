@@ -24,62 +24,68 @@ public class encrypter {
 			for (int i = 0; i < finalArray.length; i++) {
 				finalArray[i] = ourArray[arrCode[i]];
 			}
-			System.out.println("Final Arrya is finished");
+			System.out.println("Final Array is finished");
 			
 			System.out.print("Put your text to decipher (say -1YES to end the loop): ");
 			String text = reader.nextLine();
 			if (text.toUpperCase().equals("-1YES")) {
 				continueOn = false;
-			}
-			int[] shiftcode = new int[lengthOfTest(text)];
-			
-			if (continueOn) {
-				System.out.println("Managing the system");
-				for (int i = 0; i < text.length(); i++) {
-					char let = text.charAt(i);
-					System.out.println(let);
-					if ((let >= 'a' && let <= 'z') || (let >= 'A' && let <= 'Z') || (let >= '0' && let <= '9')) {
-						boolean found = false;
-						for (int j = 0; j < finalArray.length && !found; j++) {
-							System.out.println("verifying if " + let + " equals to " + finalArray[j]);
-							if (let == ourArray[j]) {
-								phrase = phrase + finalArray[j];
-								found = true;
-							}
-						}
-					} else {
-						String temp = "" + (int) let;
-						for (int k = 0; k < temp.length(); k++) {
-							char wod = temp.charAt(k);
-							System.out.println(wod);
+			} else {
+				int[] shiftcode = new int[lengthOfTest(text)];
+				
+				if (continueOn) {
+					System.out.println("Managing the system");
+					for (int i = 0; i < text.length(); i++) {
+						char let = text.charAt(i);
+						System.out.println(let);
+						if ((let >= 'a' && let <= 'z') || (let >= 'A' && let <= 'Z') || (let >= '0' && let <= '9')) {
 							boolean found = false;
 							for (int j = 0; j < finalArray.length && !found; j++) {
-								System.out.println("verifying if " + wod + " equals to " + finalArray[j]);
-								if (wod == ourArray[j]) {
+								System.out.println("verifying if " + let + " equals to " + finalArray[j]);
+								if (let == ourArray[j]) {
 									phrase = phrase + finalArray[j];
 									found = true;
 								}
 							}
-						}
-						shift(arrCode, shiftcode);
-						for (int k = 0; k < finalArray.length; k++) {
-							finalArray[k] = ourArray[arrCode[k]];
+						} else {
+							String temp = "" + (int) let;
+							for (int k = 0; k < temp.length(); k++) {
+								char wod = temp.charAt(k);
+								System.out.println(wod);
+								boolean found = false;
+								for (int j = 0; j < finalArray.length && !found; j++) {
+									System.out.println("verifying if " + wod + " equals to " + finalArray[j]);
+									if (wod == ourArray[j]) {
+										phrase = phrase + finalArray[j];
+										found = true;
+									}
+								}
+							}
+							System.out.println("SHifting code around");
+							shift(arrCode, shiftcode);
+							for (int k = 0; k < finalArray.length; k++) {
+								finalArray[k] = ourArray[arrCode[k]];
+							}
 						}
 					}
+					
+					System.out.println();
+					System.out.println("Original message: " + text);
+					System.out.println();
+					System.out.println("Encrypted text: " + phrase);
+					System.out.println();
+					System.out.println();
+					System.out.print("Your key: ");
+					printCode(arrCode, shiftcode); 
+					System.out.println();
+					
+					System.out.print("Do you want to continue (Yes to continue): ");
+					String response = reader.next();
+					if (!(response.toUpperCase().equals("YES"))) {
+						continueOn = false;
+					}
+					reader.nextLine();
 				}
-				
-				System.out.println();
-				System.out.println();
-				System.out.println(phrase);
-				System.out.println();
-				System.out.println();
-				
-				System.out.print("Do you want to continue (Yes to continue): ");
-				String response = reader.next();
-				if (!(response.toUpperCase().equals("YES"))) {
-					continueOn = false;
-				}
-				reader.nextLine();
 			}
 		}
 	}
@@ -88,6 +94,7 @@ public class encrypter {
 		Random rand = new Random();
 		int shift = rand.nextInt(arr.length);
 		index2[indexCount] = shift;
+		indexCount++;
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] + shift >= arr.length) {
 				arr[i] = arr[i] - arr.length + shift;
@@ -100,11 +107,11 @@ public class encrypter {
 	public static void printCode(int[] index, int[] index2) {
 		System.out.println();
 		for (int i = 0; i < index.length; i++) {
-			System.out.print(index[i]);
+			System.out.print("0100" + index[i]);
 		}
 		System.out.print("|||||");
-		for (int i = 0; i < index.length; i++) {
-			System.out.print(index2[i]);
+		for (int i = 0; i < index2.length; i++) {
+			System.out.print("0200" + index2[i]);
 		}
 	}
 	
